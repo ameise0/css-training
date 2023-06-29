@@ -1,0 +1,115 @@
+.header_container {
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+}
+
+#hamburger_menu_btn_check {
+    display: none;
+}
+.hamburger_menu {
+    display: none;
+}
+.header_navigation_container {
+    display: block;
+}
+
+.header_navigation {
+    display: flex;
+    justify-content: flex-start;
+    list-style: none;
+    margin: 10px;
+}
+
+.header_navigation a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.25rem;
+}
+
+.header_logo {
+    margin: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header_navigation_item {
+    margin: 10px;
+}
+/* width 720pxを境界にPCとスマホ表示を切り替え
+widthが720px以上になった時にナビゲーションをPC表示に戻すためハンバーガーメニューの実装もこの中に入れる */
+@media screen and (max-width: 720px){
+    .hamburger_menu {
+        display: block;
+    }
+    .header_navigation_container {
+        display: none;
+    }
+
+    /* ハンバーガーメニュー */
+    .hamburger_menu_btn {
+        height: 60px;
+        width: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hamburger_menu_btn span,
+    .hamburger_menu_btn span:before,
+    .hamburger_menu_btn span:after {
+        content: "";
+        display: block;
+        height: 3px;
+        width: 30px;
+        border-radius: 3px;
+        background-color: black;
+        position: absolute;
+    }
+    .hamburger_menu_btn span:before {
+        bottom: 10px;
+    }
+    .hamburger_menu_btn span:after {
+        top: 10px;
+    }
+
+    /* チェックボックスがオンになったらハンバーガーをバツに */
+    #hamburger_menu_btn_check:checked ~.hamburger_menu span:before {
+        bottom: 0px;
+        rotate: 45deg;
+    }
+    #hamburger_menu_btn_check:checked ~.hamburger_menu span {
+        background-color: transparent;
+    }
+    #hamburger_menu_btn_check:checked ~.hamburger_menu span:after {
+        top: 0px;
+        rotate: -45deg;
+    }
+
+    /* ロゴの親のdiv要素の幅を引き伸ばすことでheader_navigation_containerを二行目に表示 */
+    #hamburger_menu_btn_check:checked ~.header_logo {
+        width: calc(100% - 80px);
+    }
+    #hamburger_menu_btn_check:checked ~.header_navigation_container {
+        display: block;
+        order: 1;
+        background-color: white;
+        height: 100vh;
+    }
+    #hamburger_menu_btn_check:checked ~.header_navigation_container > .header_navigation {
+        flex-direction: column;
+        align-content: flex-start;
+    }
+    #hamburger_menu_btn_check:checked ~.header_navigation_container > .header_navigation li {
+        margin: 10px;
+    }
+}
+
+.main_content {
+    padding-top: 60px;
+}
